@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:meals/model/filter_enum.dart';
 
 class FiltersView extends StatefulWidget {
-  const FiltersView({super.key});
+  const FiltersView({super.key, required this.currentFilters});
+
+  final Map<Filter, bool> currentFilters;
 
   @override
   State<FiltersView> createState() => _FiltersViewState();
@@ -13,6 +15,15 @@ class _FiltersViewState extends State<FiltersView> {
   var _lactoseFreeFilterSet = false;
   var _vegetarianFilterSet = false;
   var _veganFilterSet = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _glutenFreeFilterSet = widget.currentFilters[Filter.glutenFree]!;
+    _lactoseFreeFilterSet = widget.currentFilters[Filter.lactoseFree]!;
+    _vegetarianFilterSet = widget.currentFilters[Filter.vegetarian]!;
+    _veganFilterSet = widget.currentFilters[Filter.vegan]!;
+  }
 
   @override
   Widget build(BuildContext context) {
