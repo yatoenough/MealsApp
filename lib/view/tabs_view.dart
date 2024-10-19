@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals/model/meal.dart';
 import 'package:meals/view/categories_view.dart';
 import 'package:meals/view/meals_view.dart';
 
@@ -11,6 +12,30 @@ class TabsView extends StatefulWidget {
 
 class _TabsViewState extends State<TabsView> {
   int _selectedViewIndex = 0;
+  final List<Meal> _favouriteMeals = [];
+
+  void _showInfoMessage(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
+  void _toggleMealFavouriteStatus(Meal meal) {
+    if (_favouriteMeals.contains(meal)) {
+      setState(() {
+        _favouriteMeals.remove(meal);
+      });
+      _showInfoMessage('Removed from favorites');
+    } else {
+      setState(() {
+        _favouriteMeals.add(meal);
+      });
+      _showInfoMessage('Marked as a favorite!');
+    }
+  }
 
   void _selectView(int index) {
     setState(() {
@@ -20,11 +45,16 @@ class _TabsViewState extends State<TabsView> {
 
   @override
   Widget build(BuildContext context) {
-    Widget acticeView = const CategoriesView();
+    Widget acticeView = CategoriesView(
+      onToggleFavorite: _toggleMealFavouriteStatus,
+    );
     var acticeViewTitle = 'Categories';
 
     if (_selectedViewIndex == 1) {
-      acticeView = const MealsView(meals: []);
+      acticeView = MealsView(
+        meals: _favouriteMeals,
+        onToggleFavorite: _toggleMealFavouriteStatus,
+      );
       acticeViewTitle = 'Favourites';
     }
 
