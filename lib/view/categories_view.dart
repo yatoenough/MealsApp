@@ -6,12 +6,11 @@ import 'package:meals/view/meals_view.dart';
 import 'package:meals/widgets/category_grid_item.dart';
 
 class CategoriesView extends StatelessWidget {
-  const CategoriesView(
-      {super.key,
-      required this.onToggleFavorite,
-      required this.avaliableMeals});
+  const CategoriesView({
+    super.key,
+    required this.avaliableMeals,
+  });
 
-  final void Function(Meal meal) onToggleFavorite;
   final List<Meal> avaliableMeals;
 
   void _selectCategory(BuildContext context, Category category) {
@@ -27,7 +26,6 @@ class CategoriesView extends StatelessWidget {
         builder: (context) => MealsView(
           title: category.title,
           meals: filteredMeals,
-          onToggleFavorite: onToggleFavorite,
         ),
       ),
     );
