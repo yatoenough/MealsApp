@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:meals/widgets/drawer_item.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({super.key});
+  const MainDrawer({super.key, required this.onSelectScreen});
+
+  final void Function(String identifier) onSelectScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +47,16 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           DrawerItem(
-            onTap: () {},
+            onTap: () {
+              onSelectScreen('meals');
+            },
             title: "Meals",
             icon: Icons.fastfood,
           ),
           DrawerItem(
-            onTap: () {},
+            onTap: () {
+              onSelectScreen('filters');
+            },
             title: "Filters",
             icon: Icons.settings,
           ),

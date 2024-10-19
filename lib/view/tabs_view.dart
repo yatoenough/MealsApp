@@ -44,6 +44,13 @@ class _TabsViewState extends State<TabsView> {
     });
   }
 
+  void _setScreen(String identifier) {
+    if (identifier == 'filters') {
+    } else {
+      Navigator.of(context).pop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget acticeView = CategoriesView(
@@ -63,7 +70,9 @@ class _TabsViewState extends State<TabsView> {
       appBar: AppBar(
         title: Text(acticeViewTitle),
       ),
-      drawer: const MainDrawer(),
+      drawer: MainDrawer(
+        onSelectScreen: _setScreen,
+      ),
       body: acticeView,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectView,
