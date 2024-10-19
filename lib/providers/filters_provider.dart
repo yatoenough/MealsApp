@@ -23,3 +23,5 @@ final filtersProvider =
     StateNotifierProvider<FiltersNotifier, Map<Filter, bool>>((ref) {
   return FiltersNotifier();
 });
+
+
