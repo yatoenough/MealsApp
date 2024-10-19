@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meals/model/meal.dart';
 import 'package:meals/view/categories_view.dart';
+import 'package:meals/view/filters_view.dart';
 import 'package:meals/view/meals_view.dart';
 import 'package:meals/widgets/main_drawer.dart';
 
@@ -45,9 +46,14 @@ class _TabsViewState extends State<TabsView> {
   }
 
   void _setScreen(String identifier) {
+    Navigator.pop(context);
     if (identifier == 'filters') {
-    } else {
-      Navigator.of(context).pop();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const FiltersView(),
+        ),
+      );
     }
   }
 
