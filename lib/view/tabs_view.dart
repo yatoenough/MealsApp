@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals/model/filter_enum.dart';
 import 'package:meals/model/meal.dart';
 import 'package:meals/view/categories_view.dart';
 import 'package:meals/view/filters_view.dart';
@@ -45,15 +46,17 @@ class _TabsViewState extends State<TabsView> {
     });
   }
 
-  void _setScreen(String identifier) {
+  void _setScreen(String identifier) async {
     Navigator.pop(context);
     if (identifier == 'filters') {
-      Navigator.push(
+      final result = await Navigator.push<Map<Filter, bool>>(
         context,
         MaterialPageRoute(
           builder: (context) => const FiltersView(),
         ),
       );
+
+      
     }
   }
 
