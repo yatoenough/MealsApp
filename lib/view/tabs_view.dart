@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meals/data/dummy_data.dart';
 import 'package:meals/model/filter_enum.dart';
 import 'package:meals/model/meal.dart';
 import 'package:meals/providers/meals_provider.dart';
