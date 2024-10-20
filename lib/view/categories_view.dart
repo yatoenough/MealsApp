@@ -5,7 +5,7 @@ import 'package:meals/model/meal.dart';
 import 'package:meals/view/meals_view.dart';
 import 'package:meals/widgets/category_grid_item.dart';
 
-class CategoriesView extends StatelessWidget {
+class CategoriesView extends StatefulWidget {
   const CategoriesView({
     super.key,
     required this.avaliableMeals,
@@ -13,8 +13,28 @@ class CategoriesView extends StatelessWidget {
 
   final List<Meal> avaliableMeals;
 
+  @override
+  State<CategoriesView> createState() => _CategoriesViewState();
+}
+
+class _CategoriesViewState extends State<CategoriesView>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+      lowerBound: 0,
+      upperBound: 1,
+    );
+  }
+
   void _selectCategory(BuildContext context, Category category) {
-    List<Meal> filteredMeals = avaliableMeals
+    List<Meal> filteredMeals = widget.avaliableMeals
         .where(
           (meal) => meal.categories.contains(category.id),
         )
